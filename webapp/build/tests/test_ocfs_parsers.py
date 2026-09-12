@@ -254,6 +254,11 @@ def test_profiles_args_env_override(monkeypatch):
     """CI and the local nightly share one pipeline; only env decides the
     crawl shape (serial-safe defaults for datacenter IPs, parallel for
     residential — the WAF treats them differently)."""
+    # This file is shared with the public capture repo, which orchestrates
+    # through capture.py and has no refresh.py.
+    if not os.path.exists(os.path.join(os.path.dirname(__file__), "..", "refresh.py")):
+        import pytest
+        pytest.skip("refresh.py is the site repo's orchestrator")
     import refresh
     for k in ("OCFS_CRAWL_WORKERS", "OCFS_TIME_BUDGET_MIN", "OCFS_REFRESH_DAYS"):
         monkeypatch.delenv(k, raising=False)
