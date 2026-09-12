@@ -1,0 +1,1057 @@
+{
+"2026-07": {
+"asOf": "2026-07-31",
+"centers": 2737,
+"centersClean": 320,
+"changes": {
+"newEnforcement": [
+{
+"area": null,
+"boro": "Bronx",
+"id": "grou-paniagua-de-pimentel-margarita-65-sherif-s-byrd-place",
+"name": "Paniagua De Pimentel, Margarita"
+},
+{
+"area": null,
+"boro": "Bronx",
+"id": "grou-abreu-america-2009-cruger-ave",
+"name": "Abreu, America"
+}
+],
+"newLicensed": [
+{
+"area": null,
+"boro": "Brooklyn",
+"id": "chil-bubmble-bee-daycare-inc-4110-5-avenue",
+"name": "Bubmble Bee Daycare Inc."
+},
+{
+"area": null,
+"boro": "Brooklyn",
+"id": "chil-central-uta-boys-division-762-wythe-avenue",
+"name": "Central Uta Boys Division"
+},
+{
+"area": null,
+"boro": "Staten Island",
+"id": "chil-ivy-league-early-learning-academy-1779-richmond-avenue-8158",
+"name": "Ivy League Early Learning Academy"
+},
+{
+"area": null,
+"boro": "Bronx",
+"id": "chil-little-stars-childcare-program-vii-llc-4180-carpenter-avenue",
+"name": "Little Stars Childcare Program Vii LLC"
+},
+{
+"area": null,
+"boro": "Brooklyn",
+"id": "chil-united-lubavitcher-yeshivoth-inc-305-remsen-avenue",
+"name": "United Lubavitcher Yeshivoth, Inc."
+},
+{
+"area": null,
+"boro": "Brooklyn",
+"id": "chil-united-lubavitcher-yeshivoth-inc-305-remsen-avenue-dc44545",
+"name": "United Lubavitcher Yeshivoth, Inc."
+}
+],
+"newOpenCritical": [
+{
+"area": "crown-heights",
+"boro": "Brooklyn",
+"id": "chil-bka-of-ny-llc-250-utica-avenue",
+"name": "Bka Of Ny LLC"
+},
+{
+"area": "sunset-park",
+"boro": "Brooklyn",
+"id": "chil-colony-south-brooklyn-houses-inc-314-44th-street",
+"name": "Colony South Brooklyn Houses Inc."
+},
+{
+"area": "flatbush",
+"boro": "Brooklyn",
+"id": "chil-friends-of-crown-heights-educational-center-2805-newkirk-avenue",
+"name": "Friends Of Crown Heights Educational Center"
+},
+{
+"area": "east-harlem",
+"boro": "Manhattan",
+"id": "chil-kennedy-childrens-center-2212-third-avenue",
+"name": "Kennedy Children's Center"
+},
+{
+"area": null,
+"boro": "Staten Island",
+"id": "chil-learn-discover-2-1368-forest-avenue",
+"name": "Learn & Discover 2"
+},
+{
+"area": "riverdale",
+"boro": "Bronx",
+"id": "chil-northeast-bronx-day-care-center-inc-5401-post-road",
+"name": "Northeast Bronx Day Care Center, Inc."
+},
+{
+"area": "parkchester",
+"boro": "Bronx",
+"id": "chil-promesa-1564-st-peters-ave",
+"name": "Promesa"
+},
+{
+"area": null,
+"boro": "Queens",
+"id": "chil-wellspring-upk-90-20-191-street",
+"name": "Wellspring Upk"
+},
+{
+"area": null,
+"boro": "Bronx",
+"id": "chil-beanstalk-child-care-academy-1362-jerome-avenue-106239",
+"name": "Beanstalk Child Care Academy"
+},
+{
+"area": null,
+"boro": "Brooklyn",
+"id": "chil-central-uta-boys-division-762-wythe-avenue",
+"name": "Central Uta Boys Division"
+},
+{
+"area": "bedford-stuyvesant",
+"boro": "Brooklyn",
+"id": "chil-cititots-early-childhood-center-inc-814-marcy-ave",
+"name": "Cititots Early Childhood Center, Inc."
+},
+{
+"area": "east-harlem",
+"boro": "Manhattan",
+"id": "chil-east-harlem-council-for-human-services-inc-440-east-116-street",
+"name": "East Harlem Council For Human Services, Inc."
+},
+{
+"area": "sunset-park",
+"boro": "Brooklyn",
+"id": "chil-family-health-centers-at-nyu-langone-230-60-street",
+"name": "Family Health Centers At Nyu Langone"
+},
+{
+"area": "throggs-neck",
+"boro": "Bronx",
+"id": "chil-gko-group-inc-4020-east-tremont-avenue",
+"name": "Gko Group, Inc."
+},
+{
+"area": "park-slope",
+"boro": "Brooklyn",
+"id": "chil-kindercare-education-llc-802-union-st",
+"name": "Kindercare Education LLC"
+},
+{
+"area": null,
+"boro": "Brooklyn",
+"id": "chil-kindercare-education-llc-802-union-st-dc39143",
+"name": "Kindercare Education LLC"
+},
+{
+"area": "little-neck",
+"boro": "Queens",
+"id": "chil-little-tulip-daycare-center-of-little-neck-248-12-northern-blvd",
+"name": "Little Tulip Daycare Center Of Little Neck"
+},
+{
+"area": null,
+"boro": "Brooklyn",
+"id": "chil-playto-pacific-llc-979-pacific-street-106482",
+"name": "Playto Pacific LLC"
+},
+{
+"area": "staten-island",
+"boro": "Staten Island",
+"id": "chil-seton-foundation-for-learning-inc-850-hylan-boulevard",
+"name": "Seton Foundation For Learning, Inc."
+},
+{
+"area": "washington-heights",
+"boro": "Manhattan",
+"id": "chil-the-medical-center-nursery-school-60-haven-avenue",
+"name": "The Medical Center Nursery School"
+},
+{
+"area": null,
+"boro": "Bronx",
+"id": "chil-little-stars-childcare-program-vii-llc-4180-carpenter-avenue",
+"name": "Little Stars Childcare Program Vii LLC"
+}
+]
+},
+"enforcement": 15,
+"homeUncorrected": 351,
+"homebased": 4490,
+"newsletter_sent": "2026-08-01T09:32:38.781831+00:00",
+"openCritical": 206,
+"prek": 1884,
+"prekApplicants": 75356,
+"prekSeats": 66714,
+"prekSitesWithSeats": 1122,
+"waterElevated": 80,
+"waterTested": 2281
+},
+"2026-08": {
+"asOf": "2026-08-31",
+"centers": 2749,
+"centersClean": 320,
+"changes": {
+"newEnforcement": [
+{
+"area": null,
+"boro": "Bronx",
+"id": "grou-mejia-rosemary-1944-andrews-avenue",
+"name": "Mejia, Rosemary"
+},
+{
+"area": null,
+"boro": "Queens",
+"id": "grou-tender-touch-day-care-60-11-broadway",
+"name": "Tender Touch Day Care"
+},
+{
+"area": null,
+"boro": "Bronx",
+"id": "home-parker-teleakie-1150-intervale-avenue",
+"name": "Parker, Teleakie"
+}
+],
+"newLicensed": [
+{
+"area": null,
+"boro": "Manhattan",
+"id": "chil-vivvi-16-llc-337-2-avenue",
+"name": "Vivvi 16, LLC"
+},
+{
+"area": null,
+"boro": "Manhattan",
+"id": "chil-vivvi-16-llc-337-2nd-avenue",
+"name": "Vivvi 16, LLC"
+},
+{
+"area": null,
+"boro": "Bronx",
+"id": "chil-bronx-sky-child-care-center-inc-495-east-158-street",
+"name": "Bronx Sky Child Care Center Inc."
+},
+{
+"area": null,
+"boro": "Bronx",
+"id": "chil-harlem-rbi-incorporated-1162-river-avenue",
+"name": "Harlem Rbi Incorporated"
+},
+{
+"area": null,
+"boro": "Bronx",
+"id": "chil-harlem-rbi-incorporated-20-bruckner-boulevard",
+"name": "Harlem Rbi Incorporated"
+},
+{
+"area": null,
+"boro": "Manhattan",
+"id": "chil-imagine-early-learning-centers-llc-560-riverside-drive",
+"name": "Imagine Early Learning Centers, LLC"
+},
+{
+"area": null,
+"boro": "Manhattan",
+"id": "chil-la-maternelle-west55-llc-400-west-55-street-dc43498",
+"name": "La Maternelle West55 LLC"
+},
+{
+"area": "sheepshead-bay",
+"boro": "Brooklyn",
+"id": "chil-ms-sunshine-inc-3096-brighton-6th-street",
+"name": "M.S. Sunshine Inc"
+},
+{
+"area": null,
+"boro": "Staten Island",
+"id": "chil-where-little-minds-grow-llc-501-richmond-hill-road",
+"name": "Where Little Minds Grow, LLC"
+},
+{
+"area": "corona",
+"boro": "Queens",
+"id": "chil-my-little-footprints-daycare-corp-100-05-39-avenue",
+"name": "My Little Footprints Daycare Corp"
+},
+{
+"area": "sheepshead-bay",
+"boro": "Brooklyn",
+"id": "chil-mssunshine-inc-3096-brighton-6th-street",
+"name": "M.S.Sunshine Inc."
+},
+{
+"area": null,
+"boro": "Queens",
+"id": "chil-al-mamoor-school-78-39-parsons-boulevard",
+"name": "Al-Mamoor School"
+},
+{
+"area": null,
+"boro": "Brooklyn",
+"id": "chil-bambi-day-care-i-v-405-81-street",
+"name": "Bambi Day Care I V"
+},
+{
+"area": "brooklyn",
+"boro": "Brooklyn",
+"id": "chil-ce-montessori-llc-117-s-3rd-st",
+"name": "C'E Montessori, Llc."
+},
+{
+"area": "queens",
+"boro": "Queens",
+"id": "chil-laguardia-community-early-childhood-learning-center-programs-inc-31-10-thomson-avenue",
+"name": "Laguardia Community Early Childhood Learning Center Programs, Inc"
+},
+{
+"area": null,
+"boro": "Brooklyn",
+"id": "chil-le-paradis-des-anges-llc-110-4-avenue",
+"name": "Le Paradis Des Anges LLC"
+},
+{
+"area": null,
+"boro": "Brooklyn",
+"id": "chil-mosdos-satmar-4423-15-avenue",
+"name": "Mosdos Satmar"
+},
+{
+"area": null,
+"boro": "Queens",
+"id": "chil-razi-school-55-11-queens-boulevard",
+"name": "Razi School"
+},
+{
+"area": null,
+"boro": "Staten Island",
+"id": "chil-st-francis-early-childhood-center-2187f-victory-boulevard",
+"name": "St. Francis Early Childhood Center"
+},
+{
+"area": null,
+"boro": "Staten Island",
+"id": "chil-st-francis-early-childhood-center-2187f-victory-boulevard-dc44432",
+"name": "St. Francis Early Childhood Center"
+},
+{
+"area": null,
+"boro": "Queens",
+"id": "chil-stepping-stone-pre-grade-school-114-36-francis-lewis-boulevard",
+"name": "Stepping Stone Pre & Grade School"
+},
+{
+"area": "morris-heights",
+"boro": "Bronx",
+"id": "chil-northeast-bronx-day-care-center-inc-1732-davidson-ave",
+"name": "Northeast Bronx Day Care Center, Inc."
+},
+{
+"area": null,
+"boro": "Brooklyn",
+"id": "chil-beanstalk-child-care-academy-58-belmont-avenue-106199",
+"name": "Beanstalk Child Care Academy"
+},
+{
+"area": null,
+"boro": "Queens",
+"id": "chil-jackson-child-development-center-inc-88-23-31-avenue",
+"name": "Jackson Child Development Center,Inc."
+},
+{
+"area": null,
+"boro": "Brooklyn",
+"id": "chil-cortelyou-early-childhood-center-1159-flatbush-avenue",
+"name": "Cortelyou Early Childhood Center"
+},
+{
+"area": null,
+"boro": "Queens",
+"id": "chil-corona-kids-10917-46th-ave",
+"name": "Corona Kids"
+},
+{
+"area": null,
+"boro": "Queens",
+"id": "chil-bais-yaakov-ateres-miriam-1214-heyson-road",
+"name": "Bais Yaakov Ateres Miriam"
+},
+{
+"area": null,
+"boro": "Brooklyn",
+"id": "chil-peer-hatorah-1680-coney-island-avenue",
+"name": "Peer Hatorah"
+},
+{
+"area": "corona",
+"boro": "Queens",
+"id": "chil-jhelc-inc-10917-46th-ave",
+"name": "Jhelc Inc."
+},
+{
+"area": null,
+"boro": "Brooklyn",
+"id": "chil-big-dreams-child-care-center-llc-3025-avenue-u",
+"name": "Big Dreams Child Care Center, LLC"
+},
+{
+"area": null,
+"boro": "Queens",
+"id": "chil-congregation-darchei-torah-257-beach-17-street",
+"name": "Congregation Darchei Torah"
+},
+{
+"area": null,
+"boro": "Brooklyn",
+"id": "chil-high-definition-kids-daycare-center-ii-corp-623-linden-boulevard",
+"name": "High Definition Kids Daycare Center II Corp."
+}
+],
+"newOpenCritical": [
+{
+"area": "belmont",
+"boro": "Bronx",
+"id": "chil-adapt-community-network-harry-h-gordon-school-2465-bathgate-avenue",
+"name": "Adapt Community Network/ Harry H. Gordon School"
+},
+{
+"area": "queens",
+"boro": "Queens",
+"id": "chil-astoria-blue-feather-early-learning-center-27-07-8-street",
+"name": "Astoria Blue Feather Early Learning Center"
+},
+{
+"area": null,
+"boro": "Brooklyn",
+"id": "chil-atlantic-collective-inc-150-clermont-avenue",
+"name": "Atlantic Collective, Inc."
+},
+{
+"area": "flatbush",
+"boro": "Brooklyn",
+"id": "chil-babove-worldwide-institute-new-hyde-park-771-779-east-49th-street",
+"name": "B'Above Worldwide Institute /New Hyde Park"
+},
+{
+"area": "jamaica",
+"boro": "Queens",
+"id": "chil-birch-family-services-inc-145-02-farmers-boulevard",
+"name": "Birch Family Services, Inc."
+},
+{
+"area": "hell-s-kitchen",
+"boro": "Manhattan",
+"id": "chil-bright-horizons-at-west-53rd-525-west-52-street",
+"name": "Bright Horizons At West 53rd"
+},
+{
+"area": "prospect-heights",
+"boro": "Brooklyn",
+"id": "chil-bumblebees-r-us-inc-1068-fulton-street",
+"name": "Bumblebees R Us, Inc."
+},
+{
+"area": "flatbush",
+"boro": "Brooklyn",
+"id": "chil-bumblebees-r-us-inc-2813-farragut-road",
+"name": "Bumblebees-R-Us Inc"
+},
+{
+"area": "prospect-heights",
+"boro": "Brooklyn",
+"id": "chil-bumblebees-r-us-inc-823-classon-avenue",
+"name": "Bumblebees- R- Us, Inc."
+},
+{
+"area": "east-tremont",
+"boro": "Bronx",
+"id": "chil-cardinal-mccloskey-community-service-685-e-182nd-street",
+"name": "Cardinal Mccloskey Community Service"
+},
+{
+"area": "staten-island",
+"boro": "Staten Island",
+"id": "chil-friends-of-crown-heights-education-center-195-gordon-street",
+"name": "Friends Of Crown Heights Education Center"
+},
+{
+"area": "morrisania",
+"boro": "Bronx",
+"id": "chil-gwendolyn-b-bland-day-care-center-749-east-163rd-street",
+"name": "Gwendolyn B. Bland Day Care Center"
+},
+{
+"area": "brownsville",
+"boro": "Brooklyn",
+"id": "chil-inner-force-totsinc-1181-east-new-york-avenue",
+"name": "Inner Force Tots,Inc."
+},
+{
+"area": "williamsburg",
+"boro": "Brooklyn",
+"id": "chil-nuestros-ninos-day-care-center-inc-243-south-2nd-street",
+"name": "Nuestros Ninos Day Care Center, Inc."
+},
+{
+"area": "jamaica",
+"boro": "Queens",
+"id": "chil-sunshine-school-llc-91-10-146-street",
+"name": "Sunshine School, LLC"
+},
+{
+"area": "washington-heights",
+"boro": "Manhattan",
+"id": "chil-the-childrens-aid-society-465-west-167-street",
+"name": "The Children's Aid Society"
+},
+{
+"area": "staten-island",
+"boro": "Staten Island",
+"id": "chil-tiny-treasures-daycare-360-van-duzer-st",
+"name": "Tiny Treasures Daycare"
+},
+{
+"area": "soundview",
+"boro": "Bronx",
+"id": "chil-tiny-tunes-daycare-evergreen-1144-evergreen-avenue",
+"name": "Tiny Tunes Daycare Evergreen"
+},
+{
+"area": "east-harlem",
+"boro": "Manhattan",
+"id": "chil-union-settlement-association-inc-1565-madison-avenue",
+"name": "Union Settlement Association, Inc."
+},
+{
+"area": "east-harlem",
+"boro": "Manhattan",
+"id": "chil-union-settlement-association-inc-1829-lexington-ave",
+"name": "Union Settlement Association, Inc."
+},
+{
+"area": "brooklyn",
+"boro": "Brooklyn",
+"id": "chil-ce-montessori-llc-117-s-3rd-st",
+"name": "C'E Montessori, Llc."
+},
+{
+"area": null,
+"boro": "Queens",
+"id": "chil-colin-newell-early-childhood-development-center-107-65-merrick-boulevard",
+"name": "Colin-Newell Early Childhood Development Center"
+},
+{
+"area": "east-elmhurst",
+"boro": "Queens",
+"id": "chil-grace-day-care-center-89-00-23-avenue",
+"name": "Grace Day Care Center"
+},
+{
+"area": "borough-park",
+"boro": "Brooklyn",
+"id": "chil-hebrew-academy-for-special-children-1311-55-street",
+"name": "Hebrew Academy For Special Children"
+},
+{
+"area": null,
+"boro": "Queens",
+"id": "chil-ka-of-flushing-llc-33-25-parsons-boulevard-106421",
+"name": "Ka Of Flushing, LLC"
+},
+{
+"area": "upper-west-side",
+"boro": "Manhattan",
+"id": "chil-la-maternelle-iii-llc-166-west-97th-street",
+"name": "La Maternelle III LLC"
+},
+{
+"area": "upper-east-side",
+"boro": "Manhattan",
+"id": "chil-primrose-of-manhattan-at-east-82nd-street-350-e-82nd-st",
+"name": "Primrose Of Manhattan At East 82nd Street"
+},
+{
+"area": "hell-s-kitchen",
+"boro": "Manhattan",
+"id": "chil-vivvi-6-llc-620-w-42nd-st",
+"name": "Vivvi 6, LLC"
+},
+{
+"area": "morris-heights",
+"boro": "Bronx",
+"id": "chil-northeast-bronx-day-care-center-inc-1732-davidson-ave",
+"name": "Northeast Bronx Day Care Center, Inc."
+},
+{
+"area": null,
+"boro": "Queens",
+"id": "chil-abc-early-childhood-center-inc-39-50-douglaston-parkway",
+"name": "Abc Early Childhood Center Inc."
+},
+{
+"area": "queens",
+"boro": "Queens",
+"id": "chil-bright-start-child-learning-center-inc-23-88-31st-street",
+"name": "Bright Start Child Learning Center, Inc."
+},
+{
+"area": null,
+"boro": "Brooklyn",
+"id": "chil-cocoon-daycare-inc-1222-49-street",
+"name": "Cocoon Daycare Inc."
+},
+{
+"area": "lower-east-side",
+"boro": "Manhattan",
+"id": "chil-hamilton-madison-house-inc-77-market-street",
+"name": "Hamilton Madison House, Inc."
+},
+{
+"area": null,
+"boro": "Manhattan",
+"id": "chil-little-scholars-learning-center-vii-600-6-avenue",
+"name": "Little Scholars Learning Center Vii"
+},
+{
+"area": null,
+"boro": "Manhattan",
+"id": "chil-little-scholars-learning-center-vii-600-6-avenue-106669",
+"name": "Little Scholars Learning Center Vii"
+},
+{
+"area": null,
+"boro": "Manhattan",
+"id": "chil-star-a-kidz-m-inc-98-freedom-place-south",
+"name": "Star A Kidz M Inc"
+},
+{
+"area": "sheepshead-bay",
+"boro": "Brooklyn",
+"id": "chil-tiny-bumblebees-day-care-infanttoddler-2848-brighton-7th-street",
+"name": "Tiny Bumblebees Day Care Infant/Toddler"
+},
+{
+"area": "crown-heights",
+"boro": "Brooklyn",
+"id": "chil-yeled-vyalda-early-childhood-centerinc-667-eastern-parkway",
+"name": "Yeled V'Yalda Early Childhood Center,Inc."
+},
+{
+"area": "queens",
+"boro": "Queens",
+"id": "chil-blanche-community-progress-day-care-center-inc-109-60-202-street",
+"name": "Blanche Community Progress Day Care Center Inc."
+},
+{
+"area": null,
+"boro": "Queens",
+"id": "chil-kiddie-kabin-corp-99-49-66-avenue",
+"name": "Kiddie Kabin Corp."
+},
+{
+"area": null,
+"boro": "Manhattan",
+"id": "chil-la-maternelle-west55-llc-400-west-55-street",
+"name": "La Maternelle West55 LLC"
+},
+{
+"area": null,
+"boro": "Manhattan",
+"id": "chil-la-maternelle-west55-llc-400-west-55-street-dc43498",
+"name": "La Maternelle West55 LLC"
+},
+{
+"area": "wakefield",
+"boro": "Bronx",
+"id": "chil-laconia-daycare-center-infant-care-inc-3950-laconia-avenue",
+"name": "Laconia Daycare Center & Infant Care Inc."
+},
+{
+"area": "kingsbridge",
+"boro": "Bronx",
+"id": "chil-little-sunshine-center-5959-broadway",
+"name": "Little Sunshine Center"
+},
+{
+"area": null,
+"boro": "Brooklyn",
+"id": "chil-ms-jenns-little-achievers-ii-corp-8315-5-avenue",
+"name": "Ms. Jenn's Little Achievers II Corp."
+},
+{
+"area": "soundview",
+"boro": "Bronx",
+"id": "chil-sound-dale-center-for-early-childhood-education-1211-croes-avenue",
+"name": "Sound Dale Center For Early Childhood Education"
+},
+{
+"area": null,
+"boro": "Manhattan",
+"id": "chil-star-a-kidz-345-west-42nd-street-105633",
+"name": "Star A Kidz"
+},
+{
+"area": null,
+"boro": "Brooklyn",
+"id": "chil-big-dreams-child-care-center-llc-3025-avenue-u",
+"name": "Big Dreams Child Care Center, LLC"
+},
+{
+"area": null,
+"boro": "Brooklyn",
+"id": "chil-abc-child-center-inc-109-nassau-avenue-6084",
+"name": "Abc Child Center, Inc"
+},
+{
+"area": "east-new-york",
+"boro": "Brooklyn",
+"id": "chil-barbey-prep-inc-683-barbey-st",
+"name": "Barbey Prep Inc."
+},
+{
+"area": "upper-west-side",
+"boro": "Manhattan",
+"id": "chil-cathedral-parkway-towers-preschool-inc-125-west-109-street",
+"name": "Cathedral Parkway Towers Preschool, Inc."
+},
+{
+"area": "tribeca",
+"boro": "Manhattan",
+"id": "chil-chinese-american-planning-council-inc-21-st-johns-lane-aka-1-york-st",
+"name": "Chinese American Planning Council Inc."
+},
+{
+"area": "manhattan",
+"boro": "Manhattan",
+"id": "chil-dwight-preschool-180-riverside-blvd",
+"name": "Dwight Preschool"
+},
+{
+"area": null,
+"boro": "Bronx",
+"id": "chil-luna-daycare-center-corp-2067-anthony-avenue-106526",
+"name": "Luna Daycare Center Corp."
+}
+]
+},
+"enforcement": 14,
+"homeUncorrected": 322,
+"homebased": 4479,
+"newsletter_sent": "2026-09-01T12:48:05.534248+00:00",
+"openCritical": 188,
+"prek": 1884,
+"prekApplicants": 75249,
+"prekSeats": 66666,
+"prekSitesWithSeats": 1121,
+"waterElevated": 78,
+"waterTested": 2290
+},
+"2026-09": {
+"asOf": "2026-09-12",
+"centers": 2758,
+"centersClean": 321,
+"changes": {
+"newEnforcement": [
+{
+"area": null,
+"boro": "Bronx",
+"id": "grou-kjs-creative-beginnings-llc-1036-wheeler-avenue",
+"name": "K&J's Creative Beginnings LLC"
+},
+{
+"area": null,
+"boro": "Bronx",
+"id": "grou-de-la-cruz-robles-juan-1733-university-avenue",
+"name": "De La Cruz Robles, Juan"
+}
+],
+"newLicensed": [
+{
+"area": "woodside",
+"boro": "Queens",
+"id": "chil-abc-preschool-kindergarten-center-66-26-laurel-hill-boulevard",
+"name": "Abc Preschool & Kindergarten Center"
+},
+{
+"area": null,
+"boro": "Brooklyn",
+"id": "chil-fun-studios-inc-1670-ocean-avenue",
+"name": "Fun Studios Inc."
+},
+{
+"area": "bensonhurst",
+"boro": "Brooklyn",
+"id": "chil-heartshare-human-services-of-new-york-1825-bath-avenue",
+"name": "Heartshare Human Services Of New York"
+},
+{
+"area": null,
+"boro": "Bronx",
+"id": "chil-luminous-early-child-care-center-531-e-137th-street",
+"name": "Luminous Early Child Care Center"
+},
+{
+"area": null,
+"boro": "Brooklyn",
+"id": "chil-the-goddard-school-of-greenpoint-85-commercial-street",
+"name": "The Goddard School Of Greenpoint"
+},
+{
+"area": null,
+"boro": "Brooklyn",
+"id": "chil-the-goddard-school-of-greenpoint-85-commercial-street-dc45318",
+"name": "The Goddard School Of Greenpoint"
+},
+{
+"area": null,
+"boro": "Brooklyn",
+"id": "chil-wonderforest-nature-preschool-38-6-avenue-dc44823",
+"name": "Wonderforest Nature Preschool"
+},
+{
+"area": null,
+"boro": "Queens",
+"id": "chil-corona-kids-10917-46th-ave",
+"name": "Corona Kids"
+},
+{
+"area": null,
+"boro": "Bronx",
+"id": "chil-arcadia-daycare-corporation-1209-colgate-avenue",
+"name": "Arcadia Daycare Corporation"
+},
+{
+"area": null,
+"boro": "Bronx",
+"id": "chil-arcadia-daycare-corporation-1209-colgate-avenue-dc45471",
+"name": "Arcadia Daycare Corporation"
+},
+{
+"area": "corona",
+"boro": "Queens",
+"id": "chil-jhelc-inc-10917-46th-ave",
+"name": "Jhelc Inc."
+},
+{
+"area": null,
+"boro": "Manhattan",
+"id": "chil-imagine-early-learning-centers-llc-1-centre-street",
+"name": "Imagine Early Learning Centers, LLC"
+},
+{
+"area": null,
+"boro": "Manhattan",
+"id": "chil-imagine-early-learning-centers-llc-1-centre-street-dc45816",
+"name": "Imagine Early Learning Centers, LLC"
+},
+{
+"area": null,
+"boro": "Brooklyn",
+"id": "chil-st-nicks-alliance-corp-211-ainslie-street",
+"name": "St. Nicks Alliance Corp."
+},
+{
+"area": "morrisania",
+"boro": "Bronx",
+"id": "chil-gwendolyn-b-bland-day-care-center-749-east-163rd-street",
+"name": "Gwendolyn B. Bland Day Care Center"
+},
+{
+"area": "corona",
+"boro": "Queens",
+"id": "chil-my-little-footprints-daycare-corp-100-05-39-avenue",
+"name": "My Little Footprints Daycare Corp"
+},
+{
+"area": null,
+"boro": "Brooklyn",
+"id": "chil-shirat-rachel-2784-coney-island-avenue",
+"name": "Shirat Rachel"
+},
+{
+"area": "jamaica",
+"boro": "Queens",
+"id": "chil-new-world-educational-program-137-37-farmers-blvd",
+"name": "New World Educational Program"
+},
+{
+"area": null,
+"boro": "Manhattan",
+"id": "chil-super-stars-tennis-inc-403-east-65-street",
+"name": "Super Stars Tennis, Inc."
+}
+],
+"newOpenCritical": [
+{
+"area": "bensonhurst",
+"boro": "Brooklyn",
+"id": "chil-heartshare-human-services-of-new-york-1825-bath-avenue",
+"name": "Heartshare Human Services Of New York"
+},
+{
+"area": null,
+"boro": "Bronx",
+"id": "chil-luminous-early-child-care-center-531-e-137th-street",
+"name": "Luminous Early Child Care Center"
+},
+{
+"area": null,
+"boro": "Brooklyn",
+"id": "chil-adams-street-daycare-llc-345-adams-street",
+"name": "Adams Street Daycare LLC"
+},
+{
+"area": "upper-west-side",
+"boro": "Manhattan",
+"id": "chil-all-my-children-daycare-and-nursery-school-622-amsterdam-ave",
+"name": "All My Children Daycare And Nursery School"
+},
+{
+"area": "parkchester",
+"boro": "Bronx",
+"id": "chil-bright-future-bilingual-academy-1363-gillespie-avenue",
+"name": "Bright Future Bilingual Academy"
+},
+{
+"area": "south-richmond-hill",
+"boro": "Queens",
+"id": "chil-heartshare-human-services-of-new-york-115-15-101-avenue",
+"name": "Heartshare Human Services Of New York"
+},
+{
+"area": null,
+"boro": "Brooklyn",
+"id": "chil-little-scholars-learning-center-viii-345-adams-street",
+"name": "Little Scholars Learning Center Viii"
+},
+{
+"area": "flatbush",
+"boro": "Brooklyn",
+"id": "chil-the-childrens-center-at-suny-brooklyn-440-lenox-road",
+"name": "The Children's Center At Suny Brooklyn"
+},
+{
+"area": "flatbush",
+"boro": "Brooklyn",
+"id": "chil-the-childrens-center-suny-brooklyn-ps-440-lenox-road",
+"name": "The Children's Center @ Suny Brooklyn - P/S"
+},
+{
+"area": "east-new-york",
+"boro": "Brooklyn",
+"id": "chil-barbey-prep-inc-683-barbey-street",
+"name": "Barbey Prep Inc."
+},
+{
+"area": "upper-west-side",
+"boro": "Manhattan",
+"id": "chil-basic-trust-127-west-94-street",
+"name": "Basic Trust"
+},
+{
+"area": "upper-west-side",
+"boro": "Manhattan",
+"id": "chil-basic-trust-127-west-94th-street",
+"name": "Basic Trust"
+},
+{
+"area": "east-tremont",
+"boro": "Bronx",
+"id": "chil-bright-future-kiddie-4-3952-3rd-ave",
+"name": "Bright Future Kiddie 4"
+},
+{
+"area": null,
+"boro": "Queens",
+"id": "chil-building-brilliance-day-care-ii-inc-1-14-56-avenue",
+"name": "Building Brilliance Day Care II Inc."
+},
+{
+"area": null,
+"boro": "Queens",
+"id": "chil-building-brilliance-day-care-ii-inc-1-14-56-avenue-106711",
+"name": "Building Brilliance Day Care II Inc."
+},
+{
+"area": "norwood",
+"boro": "Bronx",
+"id": "chil-cardinal-mccloskey-community-services-3044-hull-avenue",
+"name": "Cardinal Mccloskey Community Services"
+},
+{
+"area": "south-bronx",
+"boro": "Bronx",
+"id": "chil-fabiana-day-care-academy-inc-937-teller-avenue",
+"name": "Fabiana Day Care Academy Inc."
+},
+{
+"area": "kensington",
+"boro": "Brooklyn",
+"id": "chil-gifted-and-talented-early-developers-llc-1019-church-avenue",
+"name": "Gifted And Talented Early Developers LLC"
+},
+{
+"area": null,
+"boro": "Manhattan",
+"id": "chil-little-scholars-learning-center-vii-600-6-avenue-106669",
+"name": "Little Scholars Learning Center Vii"
+},
+{
+"area": "queens",
+"boro": "Queens",
+"id": "chil-ny-kids-club-45-45-center-blvd",
+"name": "NY Kids Club"
+},
+{
+"area": "bay-ridge",
+"boro": "Brooklyn",
+"id": "chil-smart-start-early-childhood-center-inc-8411-fort-hamilton-parkway",
+"name": "Smart Start Early Childhood Center, Inc."
+},
+{
+"area": null,
+"boro": "Brooklyn",
+"id": "chil-st-nicks-alliance-corp-211-ainslie-street",
+"name": "St. Nicks Alliance Corp."
+},
+{
+"area": null,
+"boro": "Brooklyn",
+"id": "chil-the-learning-experience-8902-5-avenue-106736",
+"name": "The Learning Experience"
+},
+{
+"area": null,
+"boro": "Queens",
+"id": "chil-tong-hua-childcare-inc-64-16-wetherole-street-106853",
+"name": "Tong Hua Childcare Inc."
+},
+{
+"area": null,
+"boro": "Brooklyn",
+"id": "chil-united-lubavitcher-preschool-841-ocean-pkwy",
+"name": "United Lubavitcher Preschool"
+}
+]
+},
+"enforcement": 15,
+"homeUncorrected": 505,
+"homebased": 7092,
+"openCritical": 183,
+"prek": 2337,
+"prekApplicants": 97164,
+"prekSeats": 80376,
+"prekSitesWithSeats": 1444,
+"waterElevated": 78,
+"waterTested": 2285
+}
+}

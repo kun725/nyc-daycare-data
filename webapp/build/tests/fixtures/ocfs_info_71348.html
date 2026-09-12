@@ -1,0 +1,405 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta property="og:title" content="Day Care Facility Search">
+	<meta property="og:site_name" content="DCFS">
+	<meta property="og:description" content="Regulated Child Care Search for New York State">
+
+	<title>Day Care Facility Search</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
+	<link rel="stylesheet" href="/dcfs/css/global.css" />
+	<link rel="icon" type="image/x-icon" href="/dcfs/favicon.ico" />
+	<link rel="stylesheet" href="/dcfs/css/styleguide.css" /> 
+	<link rel="stylesheet" href="/dcfs/css/program-info.css" />
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="/dcfs/css/nysds-full.min.css" rel="stylesheet" />
+	<link href="/dcfs/css/nysds-theme-health.min.css" rel="stylesheet" />
+	<link href="/dcfs/css/dcfs-site.css" rel="stylesheet" />
+
+	<!--Scripts-->
+	 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="/dcfs/js/programSearchMap.js"></script>
+	<script src="/dcfs/js/site.js"></script>
+	<script src="/dcfs/js/programInfo.js"></script>
+	<script src="/dcfs/js/nysds.js"></script> 
+	<script src="/dcfs/js/popper.js"></script>        
+   
+</head>
+<body>
+	 <input id="baseURL" type="hidden" value="/DCFS" />
+	 <input id="facilityId" type="hidden" value="71348" />
+
+	 
+<nys-unavheader hideSearch hideTranslate></nys-unavheader>
+
+<nys-globalheader appName="Office of Children and Family Services" homepageLink="https://ocfs.ny.gov/main/">
+    <nys-button id="translate-button" slot="user-actions" label="Translate" prefixIcon="language" suffixIcon="chevron_down">
+    </nys-button>
+</nys-globalheader>
+<nys-dropdownmenu id="dropdownmenu1" for="translate-button" position="bottom-end" class="custom-translate-list">
+    <nys-dropdownmenuitem label="English" href=/dcfs/Culture/SetCulture?culture=en-Us&amp;returnUrl=~%2FSearch%2FGetProgramInfo%2F71348 class="custom-translate-list-item active" title="English"></nys-dropdownmenuitem>
+    <nys-dropdownmenuitem label="Español" href=/dcfs/Culture/SetCulture?culture=es&amp;returnUrl=~%2FSearch%2FGetProgramInfo%2F71348 class="custom-translate-list-item " title="Spanish"></nys-dropdownmenuitem>
+    <nys-dropdownmenuitem label="বাঙালি" href=/dcfs/Culture/SetCulture?culture=bn&amp;returnUrl=~%2FSearch%2FGetProgramInfo%2F71348 class="custom-translate-list-item " title="Bengali"></nys-dropdownmenuitem>
+    <nys-dropdownmenuitem label="中文" href=/dcfs/Culture/SetCulture?culture=zh&amp;returnUrl=~%2FSearch%2FGetProgramInfo%2F71348 class="custom-translate-list-item " title="Chinese, simplified"></nys-dropdownmenuitem>
+    <nys-dropdownmenuitem label="Русский" href=/dcfs/Culture/SetCulture?culture=ru&amp;returnUrl=~%2FSearch%2FGetProgramInfo%2F71348 class="custom-translate-list-item " title="Russian"></nys-dropdownmenuitem>
+    <nys-dropdownmenuitem label="יידיש" href=/dcfs/Culture/SetCulture?culture=yi&amp;returnUrl=~%2FSearch%2FGetProgramInfo%2F71348 class="custom-translate-list-item " title="Yiddish"></nys-dropdownmenuitem>
+    <nys-dropdownmenuitem label="한국어" href=/dcfs/Culture/SetCulture?culture=ko&amp;returnUrl=~%2FSearch%2FGetProgramInfo%2F71348 class="custom-translate-list-item " title="Korean"></nys-dropdownmenuitem>
+    <nys-dropdownmenuitem label="Italiano" href=/dcfs/Culture/SetCulture?culture=it&amp;returnUrl=~%2FSearch%2FGetProgramInfo%2F71348 class="custom-translate-list-item " title="Italian"></nys-dropdownmenuitem>
+    <nys-dropdownmenuitem label="العربية" href=/dcfs/Culture/SetCulture?culture=ar&amp;returnUrl=~%2FSearch%2FGetProgramInfo%2F71348 class="custom-translate-list-item " title="Arabic"></nys-dropdownmenuitem>
+    <nys-dropdownmenuitem label="Polski" href=/dcfs/Culture/SetCulture?culture=pl&amp;returnUrl=~%2FSearch%2FGetProgramInfo%2F71348 class="custom-translate-list-item " title="Polish"></nys-dropdownmenuitem>
+    <nys-dropdownmenuitem label="Français" href=/dcfs/Culture/SetCulture?culture=fr&amp;returnUrl=~%2FSearch%2FGetProgramInfo%2F71348 class="custom-translate-list-item " title="French"></nys-dropdownmenuitem>
+    <nys-dropdownmenuitem label="Kreyòl Ayisyen" href=/dcfs/Culture/SetCulture?culture=fr-HT&amp;returnUrl=~%2FSearch%2FGetProgramInfo%2F71348 class="custom-translate-list-item " title="Haitian Creole"></nys-dropdownmenuitem>
+    <nys-dropdownmenuitem label="اردو" href=/dcfs/Culture/SetCulture?culture=ur&amp;returnUrl=~%2FSearch%2FGetProgramInfo%2F71348 class="custom-translate-list-item " title="Urdu"></nys-dropdownmenuitem>
+</nys-dropdownmenu>
+<input id="currentCulture" type="hidden" value="en-US" />
+
+<script>
+    $("#translate-button").on("click", function(){
+        // Select the dropdownmenu item component
+        const dropdownmenuItems = document.querySelectorAll("nys-dropdownmenuitem");
+        if(dropdownmenuItems != null && dropdownmenuItems.length>0){
+            dropdownmenuItems[0].onfocus = dropdownmenuItems[0].blur;
+        }
+    
+    });
+     
+</script>
+
+                                                                                                                                                                                                             
+
+	<input id="baseURL" type="hidden" value="/DCFS" />
+	<div id="main-container">
+		<main class="nys-grid-container">
+		
+			<div class="nys-grid-row mt-5">
+				<div id="custom-tooltip" class="custom-tooltip">
+					<span id="tooltip-text"></span>
+					<div id="tooltip-arrow" class="tooltip-arrow"></div>
+				</div>
+				<div class="nys-grid-col-6 nys-float-left d-flex align-items-center" id="divSearchAgain">
+						<i class="bi bi-chevron-double-left d-flex align-items-center nys-padding-r-100 link-primary fw-bold dcfs-link_18_blue"></i>
+						<a class="dcfs-link_18_blue" href="/dcfs">Search Again</a>
+				</div>
+				<div id="printButton" class="nys-grid-col-6  text-end nys-flex-align-self-end">
+						<a class="special-link nys-font-ui-md" href="#" onclick="printDiv('main-container');">
+							<nys-icon name="print"
+									  class="icon-align-margin-bt-7n"
+									  aria-label="print"
+									  size="4xl">
+							</nys-icon> Print this page
+						</a>
+					</div>
+			</div>
+			<div class="nys-grid-col-12">
+				
+				<h1 id="facilityName-header" class="mb-0  nys-font-h2">
+					<bdi>Straight A Group Family Day Care Corp.</bdi>
+					</h1>
+
+				<h1 id="facilityName-header-checklist" class="mb-0 nys-font-h2"><a class="theme-color" href="/dcfs/Search/GetProgramInfo/71348">
+					<bdi> Straight A Group Family Day Care Corp.</bdi> 
+									<nys-icon id="facility-header-arrow" class="icon-align-margin-bt-5n ms-1" name='arrow_forward' size="xl" ariaLabel="Go to Facility Home"></nys-icon>
+				</a>
+				</h1>
+				
+					<p class="nys-font-ui-lg"><b>License/Registration ID:</b> <bdi>71348</bdi></p>
+
+				 <div class="d-flex flex-wrap align-items-center gap-2 mt-3">
+
+
+
+						<img class="tooltip-trigger" tabindex="0" role="button" aria-label="Group Slot" data-tooltip-content="This Program has Open Slots" src="/dcfs/images/GroupOutline.png" alt="Group Slot" width="30" />
+						<img class="tooltip-trigger" tabindex="0" role="button" aria-label="Auto Injector" data-tooltip-content="Program is approved for auto-injectors." src="/dcfs/images/HelpAssistance.png" alt="Auto Injector" width="30" />
+				</div>
+					<div class="nys-font-ui-lg mt-4">
+						<bdi>
+1579 Metropolitan Avenue, 11st Floor, Apt. 11H  Bronx, NY  10462						</bdi><br />
+					</div>
+						<a class="column nys-font-h6" href="https://www.google.com/maps?q=1579 Metropolitan Avenue, 11st Floor, Apt. 11H  Bronx, NY  10462" target="_blank">Get Directions
+							<nys-icon class="icon-align-margin-bt-7n ms-1" name='arrow_forward' size="3xl" ariaLabel="Get Directions"></nys-icon>
+						</a>
+					<div class="mt-3">
+							<div class="nys-font-ui-md nys-display-flex">
+								
+							
+							
+			        
+								<nys-icon name="phone_in_talk"
+										  size="4xl"
+										  color="var(--nys-color-success)"
+										  class="icon-align-margin-bt-7n">
+								</nys-icon>
+							<bdi>
+								<a class="ms-1" href="tel:(718) 892-6667">(718) 892-6667</a>
+							</bdi>
+							
+							</div>
+							<div class="nys-font-ui-md ">
+								<nys-icon name="mail" 
+								size="4xl" 
+								color="var(--nys-color-success)" 
+								class="icon-align-margin-bt-7n">
+								</nys-icon>
+								<a class="ms-1" href="mailto:JOANA315@optonline.net"> JOANA315@optonline.net </a>
+							</div>
+				</div>
+				</div>
+
+
+			
+
+			<div id="searchNavTabsMobDiv" style="margin-left:-20px; margin-right:-30px;">
+				<nys-accordion class="nys-grid-container" >
+					<nys-accordionitem id="individualAcc1" 
+									   heading="Program Navigation"
+									   expanded" >
+				<ul  class="list-unstyled nys-font-ui-lg">
+					<li>
+						<a class="nav-link  mt-3 mb-4" data-tab="GetProgramInfo"  data-id="71348">Program Information</a>
+					</li>
+						<li>
+						<a class="nav-link  mb-4"  data-tab="GetScheduleAndRates" data-id="71348">Schedule &amp; Prices/Rates</a>
+						</li>
+						<li>
+						<a class="nav-link  mb-4"  data-tab="GetCapacityOpenSlots" data-id="71348">Capacity &amp; Open Slots</a>
+						</li>
+					<li>
+						<a class="nav-link  mb-4"  data-tab="GetInspectionHistory" data-id="71348" data-year="2026">Inspection History</a>
+					</li>
+					<li>
+						<a class="nav-link" data-tab="GetComplaintHistory" data-id="71348" data-year="2026">Complaint History</a>
+					</li>
+				</ul>
+				</nys-accordion>
+			</div>
+			<nav>
+					<div id="searchNavTabsWinDiv">
+ 
+						<ul class="tabs ps-0 nys-font-body-md nys-grid-row" id="pi-searchTabs" role="tablist" style="width:fit-content">
+							<li class="no-bullet nav-item" role="presentation">
+								<a class="nav-link active" data-tab="GetProgramInfo"
+								   data-bs-toggle="tab" href="#GetProgramInfo" data-id="71348" role="tab">Program Information</a>
+							</li>
+								<li class="no-bullet nav-item" role="presentation">
+									<a class="nav-link" data-tab="GetScheduleAndRates" data-bs-toggle="tab" href="#GetSchedulesAndRates"
+									   data-url="/dcfs/Search/GetScheduleAndRates" data-id="71348" role="tab">Schedule &amp; Prices/Rates</a>
+								</li>
+								<li class="no-bullet nav-item" role="presentation">
+									<a class="nav-link" data-tab="GetCapacityOpenSlots" data-bs-toggle="tab" href="#GetCapacityOpenSlots"
+									   data-url="/dcfs/Search/GetCapacityOpenSlots" data-id="71348" role="tab">Capacity &amp; Open Slots</a>
+								</li>
+							<li class="no-bullet nav-item" role="presentation">
+								<a class="nav-link" data-tab="GetInspectionHistory" data-bs-toggle="tab" href="#GetInspectionHistory"
+								   data-url="/dcfs/Search/GetInspectionHistory" data-id="71348" data-year="2026" role="tab">Inspection History</a>
+							</li>
+							<li class="no-bullet nav-item" role="presentation">
+								<a class="nav-link" data-tab="GetComplaintHistory" data-bs-toggle="tab" href="#GetComplaintHistory"
+								   data-url="/dcfs/Search/GetComplaintHistory" data-id="71348" data-year="2026" role="tab">Complaint History</a>
+							</li>
+						</ul>
+
+ 
+					</div>
+				</nav>
+	   
+		</main>
+
+		<div class="w-100 bg-light" id="tabContent">
+			
+				
+
+
+
+<div id="tabContent">
+    
+<div class="nys-grid-container">
+    <div id="searchNavTabsMobDiv">
+        <br />
+        <div class="nys-font-h4">
+            Program Information
+        </div>
+    </div>
+   <main class="program-details">
+
+        <div class="nys-mobile-lg:nys-grid-col-6 nys-tablet\:nys-grid-col-6">
+
+                     <div class="nys-font-h6">
+				License/Registration ID: <bdi><small class="nys-font-ui-lg">71348</small></bdi>
+                     </div>
+                      <div class="nys-font-h6">
+                        Program Name: <small class="nys-font-ui-lg"><bdi>Straight A Group Family Day Care Corp.</bdi></small>
+                     </div>
+                      <div class="nys-font-h6">
+                        Program Type: <small class="nys-font-ui-lg">Group Family Day Care</small>
+                     </div>
+                      <div class="nys-font-h6">
+                        School District: <small class="nys-font-ui-lg">Bronx 11</small>
+                     </div>
+
+                     <div class="nys-font-h6">
+                        Program Status: <small class="nys-font-ui-lg">Open</small>
+                     </div>
+                </div>
+
+        <div class="nys-mobile-lg:nys-grid-col-6 nys-tablet\:nys-grid-col-6 p-col-2">
+
+                    <div class="nys-font-h6">
+                       QUALITYstarsNY Participant:<small class="nys-font-ui-lg">
+                            No</small></div>
+
+                <div class="nys-font-h6">
+
+                Non-Patient Specific Auto Injectors<a name="Non-Patient Specific Auto Injectors help" aria-label="Non-Patient Specific Auto Injectors" tabindex="0" class="a-popper" role="button" data-bs-trigger="focus" id="helpOfAutoInjectors"
+                    data-bs-title="Auto Injectors" data-bs-container="body" data-bs-html="true" data-bs-custom-class="custom-popover"
+                                                    data-bs-content="&lt;div class=&#x27;d-flex&#x27;&gt;&lt;div class=&#x27;me-3 text-secondary fs-1&#x27;&gt;&lt;img src=&#x27;../../images/HelpAssistance.png&#x27; alt=&#x27;Non-patient Specific Auto Injectors&#x27; width=&#x27;35&#x27; /&gt;&lt;/div&gt;&lt;div&gt;&lt;h6 class=&#x27;fw-bold mb-1&#x27;&gt;Non-patient Specific Auto Injectors:&lt;/h6&gt;&lt;p class=&#x27;mb-0&#x27;&gt; These programs have Epinephrine, a first line drug of choice for the emergency treatment of allergic reactions and are used in the emergency treatment of a child appearing to experience anaphylactic symptoms due to an allergy.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;">
+                <nys-icon name="help" size="xl" color="var(--nys-color-theme)"></nys-icon>
+                    </a>:
+                    <small class="nys-font-ui-lg">
+                        Yes
+                    </small>
+                </div>
+            <div class="nys-font-h6">
+
+
+
+        Administers Medication<a name="Administers Medication help" aria-label="Administers Medication" tabindex="0" class="a-popper" role="button" data-bs-trigger="focus" id="helpOfAdminMed"
+                                             data-bs-title="Administer Medication" data-bs-container="body" data-bs-html="true" data-bs-custom-class="custom-popover"
+                                 data-bs-content="&lt;div class=&#x27;d-flex&#x27;&gt;&lt;div class=&#x27;me-3 text-secondary fs-1&#x27;&gt;&lt;img src=&#x27;../../images/PillBottle.png&#x27; alt=&quot;Medication Admin&quot; width=&quot;30&quot; /&gt;&lt;/div&gt;&lt;div&gt;&lt;h6 class=&#x27;fw-bold mb-1&#x27;&gt;Approved to Administer Medication:&lt;/h6&gt;&lt;p class=&#x27;mb-0&#x27;&gt; This program has New York State Office of Children and Family Services (OCFS) approval to administer medications on-site in compliance with OCFS medication-administration standards.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;" alt="Medication Admin" width="30">
+
+        <nys-icon name="help" size="xl" color="var(--nys-color-theme)"></nys-icon>
+                </a>:<small class="nys-font-ui-lg"> No</small>
+                    </div>
+
+                <div class="nys-font-h6">
+
+
+        Removed from Referral List <a name="Removed from Referral List help" aria-label="Removed from Referral List" tabindex="0" class="a-popper" role="button" data-bs-trigger="focus" id="helpOfRefferalList"
+                    data-bs-title="Referral List" data-bs-container="body" data-bs-html="true" data-bs-custom-class="custom-popover"
+                    data-bs-content="&lt;p&gt; If a facility is removed from the referral list Child Care Resource and Referral Agencies (CCRR&#x27;s) will not refer families to this program until compliance issues are resolved.&lt;/p&gt;">
+
+        <nys-icon name="help" size="xl" color="var(--nys-color-theme)"></nys-icon>
+                    </a>:<small class="nys-font-ui-lg">
+                        No
+                    </small>
+                </div>
+            <div class="nys-font-h6">
+                   
+
+                        Located in a School:<small class="nys-font-ui-lg">
+                            No
+                        </small>
+                    </div>
+
+                </div>
+      
+        <section class="license-info">
+           
+            <div class="nys-mobile-lg:nys-grid-col-12 nys-tablet\:nys-grid-col-12">
+                <div class="nys-font-h6">
+                        Original License/Registration Date: <small class="nys-font-ui-lg"> 08/08/2000</small>
+                    </div>
+
+                <div class="nys-font-h6">
+                Current License/Registration Dates: <small class="nys-font-ui-lg">  08/09/2026 - 08/08/2030</small>
+                </div>
+                
+                
+           
+            
+               
+              
+           
+            
+            </div>
+        </section>
+
+
+            <section class="contact-info">
+            <div class="nys-mobile-lg:nys-grid-col-12 nys-tablet\:nys-grid-col-12">
+                    <div class="nys-font-h6">
+                        Contact Name:<small class="nys-font-ui-lg"> Joana  Twum, On-Site Provider</small>
+                    </div>
+		        <div class="nys-font-h6">
+			        
+                        <span>Phone:</span>
+			            <small class= "nys-font-ui-lg"><bdi> (718) 892-6667 </bdi></small>
+		        </div>
+                                <div class="nys-font-h6">
+                        Email:<small class="nys-font-ui-lg"> JOANA315@optonline.net</small>
+                    </div>
+                    <div class="nys-font-h6">
+				Address:<bdi><small class="nys-font-ui-lg"> 1579 Metropolitan Avenue, 11st Floor, Apt. 11H  Bronx, NY  10462</small></bdi>
+                    </div>
+            </div>
+            </section>
+           
+
+            <section class="details">
+            
+                    <p>Parents are urged to use this report as a starting point of their assessment of a child care program and to follow up&#xD;&#xA; directly with the program or the respective regulatory oversight office for any relevant updated information.<br />
+                        <br />
+            In addition to the information provided for each program, you may contact the <a class="fw-semibold" href="https://ocfs.ny.gov/programs/childcare/regional-offices.php">  office responsible for oversight</a> of the program regarding the licensing and regulatory compliance history of any child care provider who is or was licensed by OCFS.
+                    </p>
+            
+
+            </section>
+        </main>
+</div>
+
+
+</div>
+
+
+			
+
+
+		</div>
+
+	</div>
+		<nys-globalfooter agencyName="Office of Children and Family Services" homepageLink="https://ocfs.ny.gov/main/">
+		</nys-globalfooter>
+		<nys-unavfooter></nys-unavfooter>
+	 
+		
+	<script type="text/javascript">
+		var baseURL='/dcfs/Search/';
+		var currentPage = '';
+		if (currentPage === 'InspectionChecklist') {
+			$('#pi-searchTabs').hide();
+			$('#tabContent').removeClass('bg-light');
+			$('#facilityName-header').addClass('theme-color');
+			$('#facilityName-header-checklist').show();
+			$('#facilityName-header').hide();
+			window.addEventListener('resize', function(){
+			  if(window.innerWidth >=1920){
+					window.location.reload();}
+			  setDivHeight()});
+		  window.addEventListener('load', setDivHeight);
+		}
+		else{
+			$('#facilityName-header-checklist').hide()
+		}
+
+		
+		function setDivHeight() {
+			const chklstDescDivList = document.getElementsByClassName('chklstDesc');
+			const complianceStatusDivList = document.getElementsByClassName('complianceStatus');
+
+			if (chklstDescDivList.length > 0 && complianceStatusDivList.length > 0) {
+				for (const [index, chklstDesc] of Array.from(chklstDescDivList).entries()) {
+					const chklstDescDivHeight = chklstDesc.scrollHeight; // Get the height including padding and border
+				   complianceStatusDivList[index].style.height = chklstDescDivHeight + 'px';
+				   $(complianceStatusDivList[index]).addClass('border-left'); 
+				}
+			}
+		}
+		  
+	</script>
+</body>
+</html>

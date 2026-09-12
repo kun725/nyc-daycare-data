@@ -1,0 +1,44 @@
+# The whole job of this repository: pull what the government publishes,
+# commit it with capture dates. Runs twice daily on free public-repo
+# minutes; the crawl is serial (GitHub runners are datacenter IPs and the
+# state's WAF only allows parallel crawling from residential networks) and
+# stops itself with time to commit before GitHub's 6-hour job kill.
+name: Capture public records
+
+on:
+  schedule:
+    - cron: "41 3 * * *"
+    - cron: "41 15 * * *"
+  workflow_dispatch: {}
+
+concurrency:
+  group: capture
+  cancel-in-progress: false
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 355
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - name: Run all fetchers (receipt gates inside)
+        env:
+          SOCRATA_APP_TOKEN: ${{ secrets.SOCRATA_APP_TOKEN }}
+        run: python webapp/build/capture.py
+      - name: Commit captured records
+        run: |
+          git config user.name "capture-bot"
+          git config user.email "actions@github.com"
+          git add webapp/data/processed/
+          if git diff --cached --quiet; then
+            echo "No changes captured."
+          else
+            git commit -m "capture: $(date -u +%FT%H:%MZ)"
+            git push || (git -c rebase.autostash=true pull --rebase -X theirs origin main && git push)
+          fi

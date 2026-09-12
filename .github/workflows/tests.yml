@@ -1,0 +1,36 @@
+# Parser tests on every change; live source canaries every 6 hours.
+# Failures surface through GitHub's own workflow-failure emails.
+name: Tests and source canaries
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+    paths: ["webapp/build/**"]
+  schedule:
+    - cron: "7 */6 * * *"
+  workflow_dispatch: {}
+
+jobs:
+  unit:
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pytest
+      - run: pytest webapp/build/tests -m "not canary" -q
+  canaries:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pytest
+      - run: pytest webapp/build/tests -m canary -q
