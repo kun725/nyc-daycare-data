@@ -21,7 +21,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install pytest
+      - run: pip install pytest pyflakes
       - run: pytest webapp/build/tests -m "not canary" -q
   canaries:
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'

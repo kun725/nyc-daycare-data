@@ -248,3 +248,19 @@ def test_scrape_degrades_to_serial_on_parallel_block(tmp_path, monkeypatch, caps
     assert "crawl degrading" in out           # the trip announced itself
     assert "dropping to a single worker" in out
     assert done == 8                          # serial phase finished the rest
+
+
+def test_profiles_args_env_override(monkeypatch):
+    """CI and the local nightly share one pipeline; only env decides the
+    crawl shape (serial-safe defaults for datacenter IPs, parallel for
+    residential — the WAF treats them differently)."""
+    import refresh
+    for k in ("OCFS_CRAWL_WORKERS", "OCFS_TIME_BUDGET_MIN", "OCFS_REFRESH_DAYS"):
+        monkeypatch.delenv(k, raising=False)
+    args = refresh._profiles_args()
+    assert args[-1] == "1" and "--workers" in args          # CI-safe default
+    monkeypatch.setenv("OCFS_CRAWL_WORKERS", "4")
+    monkeypatch.setenv("OCFS_TIME_BUDGET_MIN", "90")
+    args = refresh._profiles_args()
+    assert args[args.index("--workers") + 1] == "4"
+    assert args[args.index("--time-budget-min") + 1] == "90"

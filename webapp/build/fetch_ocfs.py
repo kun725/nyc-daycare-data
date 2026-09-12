@@ -100,11 +100,22 @@ def fetch_all():
         ",".join("'%s'" % c for c in NYC_COUNTIES))
     out, offset = {}, 0
     while True:
-        try:
-            rows = soda_get(where, 1000, offset)
-        except Exception as e:
-            print(f"  ! fetch failed at offset {offset}: {e}")
-            break
+        # A page failure USED to break the loop and write whatever had been
+        # collected: one Socrata flake produced a 4,000-row "registry" out of
+        # 8,569 (seen 2026-09-12). Retry, then refuse to write a partial pull
+        # — a truncated registry silently un-publishes real providers.
+        rows = None
+        for attempt in range(4):
+            try:
+                rows = soda_get(where, 1000, offset)
+                break
+            except Exception as e:
+                print(f"  ! fetch failed at offset {offset} (attempt {attempt + 1}): {e}")
+                time.sleep(5 * (attempt + 1))
+        if rows is None:
+            print(f"::error title=OCFS registry pull truncated::Failed at offset "
+                  f"{offset} after 4 attempts; refusing to write a partial registry.")
+            sys.exit(4)
         if not rows:
             break
         for row in rows:
@@ -678,6 +689,99 @@ def scrape_profiles(limit=None, delay=2.0, checklist_budget=2500,
         sys.exit(3)
     return done
 
+
+# ---- Raw-record minting (restored 2026-09-12) ----------------------------
+# The crawler-v2 rewrite (PR #97) silently dropped mint_missing_homebased
+# and its helpers while replacing the adjacent v1 parser. The registry step
+# was not marked required, so every run since printed a NameError and went
+# green with stale registry data — exactly the silent-failure class the
+# gates exist to prevent. Restored verbatim from cf4dca8c60e; the step is
+# now required and a lint test fails on any undefined name.
+SRC_DIR = os.path.normpath(os.path.join(HERE, "..", "data", "processed", "facilities"))
+
+_BORO_FROM_COUNTY = {"Bronx": "Bronx", "Brooklyn": "Brooklyn", "Kings": "Brooklyn",
+                     "Manhattan": "Manhattan", "New York": "Manhattan",
+                     "Queens": "Queens", "Richmond": "Staten Island",
+                     "Staten Island": "Staten Island"}
+
+_TYPE_MAP = {
+    "GFDC": ("grou", "group_home_care", "Group Family Day Care Home"),
+    "FDC": ("home", "home_daycare", "Family Day Care Home"),
+}
+
+def _slug(text):
+    import re as _re2
+    t = _re2.sub(r"[^a-z0-9]+", "-", (text or "").lower()).strip("-")
+    return _re2.sub(r"-{2,}", "-", t) or "x"
+
+def mint_missing_homebased(registry):
+    existing = set()
+    for fn in os.listdir(SRC_DIR):
+        if not (fn.startswith("grou-") or fn.startswith("home-")) or not fn.endswith(".json"):
+            continue
+        try:
+            with open(os.path.join(SRC_DIR, fn), encoding="utf-8") as fh:
+                lic = str(json.load(fh).get("license_number") or "")
+            if lic:
+                existing.add("".join(c for c in lic if c.isdigit()))
+        except Exception:
+            continue
+    minted, skipped_closed, by_boro = 0, 0, {}
+    for rec in registry.values():
+        fid = "".join(c for c in str(rec.get("facility_id") or "") if c.isdigit())
+        ptype = _TYPE_MAP.get((rec.get("program_type") or "").strip())
+        if not fid or not ptype or fid in existing:
+            continue
+        if (rec.get("status") or "") not in ("License", "Registration"):
+            skipped_closed += 1
+            continue
+        prefix, ftype, flabel = ptype
+        boro = _BORO_FROM_COUNTY.get((rec.get("county") or "").strip(), "")
+        name, addr = rec.get("name") or "", rec.get("address") or ""
+        base = f"{prefix}-{_slug(name)}-{_slug(addr)}"
+        path = os.path.join(SRC_DIR, base + ".json")
+        if os.path.exists(path):
+            base = f"{base}-{fid}"
+            path = os.path.join(SRC_DIR, base + ".json")
+        mix = rec.get("capacity_mix") or {}
+        out = {
+            "facility_id": base,
+            "facility_slug": f"{_slug(name)}-{_slug(boro)}",
+            "facility_name": name,
+            "license_number": fid,
+            "license_status": rec.get("status"),
+            "license_expiration": rec.get("license_expiration_date"),
+            "address": addr,
+            "borough": boro,
+            "neighborhood": "",
+            "zipcode": rec.get("zip") or "",
+            "facility_type": ftype,
+            "facility_type_label": flabel,
+            "is_open": True,
+            "maximum_capacity": rec.get("total_capacity") or "",
+            "capacity_infant": mix.get("infant"),
+            "capacity_toddler": mix.get("toddler"),
+            "capacity_preschool": mix.get("preschool"),
+            "capacity_school_age": mix.get("school_age"),
+            "source": "NYS OCFS",
+            "phone": rec.get("phone") or "",
+            "email": "",
+            "website": rec.get("profile_url") or "",
+            "age_range": "",
+            "inspections": [],
+            "latitude": float(rec["latitude"]) if rec.get("latitude") else None,
+            "longitude": float(rec["longitude"]) if rec.get("longitude") else None,
+            "dcid": None,
+            "address_private": False,
+            "safety": {"score": None, "label": "No Data", "color": "gray"},
+        }
+        with open(path, "w", encoding="utf-8") as fh:
+            json.dump(out, fh, ensure_ascii=False)
+        minted += 1
+        by_boro[boro] = by_boro.get(boro, 0) + 1
+    print(f"Minted {minted} new home-based raw records (by borough: {by_boro}); "
+          f"{skipped_closed} closed/inactive registry rows skipped; "
+          f"{len(existing)} already had records.")
 
 def main():
     if "--profiles" in sys.argv:
