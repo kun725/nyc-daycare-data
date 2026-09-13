@@ -7,9 +7,19 @@ name: Capture public records
 
 on:
   schedule:
+    # Three shorter runs instead of two long ones: a run commits only at the
+    # end, so a 5-hour crawl puts 5 hours of work at risk of any late failure
+    # (2026-09-12: a missing permissions block 403'd the push and discarded
+    # 1,432 crawled providers). ~170 min each banks ~800 providers a run.
     - cron: "41 3 * * *"
-    - cron: "41 15 * * *"
+    - cron: "41 11 * * *"
+    - cron: "41 19 * * *"
   workflow_dispatch: {}
+
+# The default GITHUB_TOKEN is read-only in this repo; the commit step needs
+# write or it 403s after the crawl has already happened.
+permissions:
+  contents: write
 
 concurrency:
   group: capture
@@ -18,7 +28,7 @@ concurrency:
 jobs:
   capture:
     runs-on: ubuntu-latest
-    timeout-minutes: 355
+    timeout-minutes: 200
     steps:
       - uses: actions/checkout@v4
         with:
@@ -30,6 +40,7 @@ jobs:
       - name: Run all fetchers (receipt gates inside)
         env:
           SOCRATA_APP_TOKEN: ${{ secrets.SOCRATA_APP_TOKEN }}
+          OCFS_TIME_BUDGET_MIN: "170"
         run: python webapp/build/capture.py
       - name: Commit captured records
         run: |
