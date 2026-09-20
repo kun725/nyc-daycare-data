@@ -105,13 +105,19 @@ def fetch_all():
         # 8,569 (seen 2026-09-12). Retry, then refuse to write a partial pull
         # — a truncated registry silently un-publishes real providers.
         rows = None
-        for attempt in range(4):
+        # Patient backoff: a Socrata 503 is usually a short outage, not a
+        # dead source, and the whole run aborts rather than write a partial
+        # registry. Four tries inside one minute (the original spacing) gave
+        # up while the host was merely busy and cost a capture cycle
+        # (2026-09-19); 30s/1m/2m/4m/8m rides out the common blips.
+        for attempt in range(5):
             try:
                 rows = soda_get(where, 1000, offset)
                 break
             except Exception as e:
                 print(f"  ! fetch failed at offset {offset} (attempt {attempt + 1}): {e}")
-                time.sleep(5 * (attempt + 1))
+                if attempt < 4:
+                    time.sleep(30 * (2 ** attempt))
         if rows is None:
             print(f"::error title=OCFS registry pull truncated::Failed at offset "
                   f"{offset} after 4 attempts; refusing to write a partial registry.")
