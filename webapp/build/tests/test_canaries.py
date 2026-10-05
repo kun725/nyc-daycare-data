@@ -75,44 +75,56 @@ def test_dohmh_roster_shape():
     assert total >= 2400, rows
 
 
+def _require_provider_page(html, who):
+    """Skip rather than fail when the state served something that is not a
+    provider page at all.
+
+    OCFS's WAF blocks datacenter traffic (4 parallel workers from a GitHub
+    runner: 0 ok / 456 errors on 2026-09-11; serial from the same host: 754/0),
+    so a probe running in CI can be handed a challenge or error page with a 200
+    status. The parsers then find no labels and every field comes back None,
+    which is indistinguishable from source drift unless we look.
+
+    That ambiguity made this canary cry wolf on 2026-09-17, 09-21 and 09-22.
+    Each time the page was fine: re-running the same parser against a live
+    fetch on 2026-10-04 returned program_status='Open' plus email and contact.
+    Three false alarms in a week is worse than no canary, because it teaches
+    you to ignore the one that matters.
+
+    The anchor is the license id, which every real provider page carries and no
+    block page does. Present but unparseable => genuine drift, so fail loudly.
+    """
+    if "License/Registration ID" not in html:
+        pytest.skip(f"OCFS served a non-provider page for {who} "
+                    f"({len(html)} bytes) — upstream block, not source drift")
+
+
 def test_ocfs_profile_app_alive():
     """The consumer app's three core routes parse for a known provider —
     this is the canary that would have caught both route migrations."""
-    info = fo._parse_info_v2(_get(fo.INFO_TMPL.format("71348")))
-    assert info.get("program_status"), info
+    _info_html = _get(fo.INFO_TMPL.format("71348"))
+    _require_provider_page(_info_html, "info/71348")
+    info = fo._parse_info_v2(_info_html)
+    # Assert on fields the BUILD actually consumes. program_status is parsed
+    # but has no downstream reader (grep: fetch_ocfs.py and these tests only),
+    # so it alone must not decide whether the pipeline is healthy.
+    assert info.get("email") or info.get("contact_name"), info
+    assert isinstance(info.get("administers_medication"), bool), info
     visits = fo._parse_history_v2(_get(fo.HIST_TMPL.format("71348")))
     assert len(visits) >= 3 and all(v["date"] for v in visits)
     with_chk = [v for v in visits if v["chk_id"]]
     assert with_chk, "no checklist links found — markup changed"
-    # Walk visits newest-first. Some visits legitimately carry no items —
-    # the state's own page says "Checklist items were not found for this
-    # inspection" — and a just-posted inspection usually has none yet. So
-    # asserting on whichever visit happens to be newest fires a false alarm
-    # the morning after any inspection posts (it did, 2026-09-17). Liveness
-    # is: the route answers, and SOME visit here still itemizes.
-    best = 0
-    for v in with_chk[:5]:
-        page = _get(fo.CHK_TMPL.format(v["chk_id"], "71348"))
-        if "Checklist items were not found" in page:
-            continue          # an expected, explicit answer from the source
-        seg = fo._checklist_segment(page, v["id"])
-        best = max(best, len(fo._parse_checklist_v2(seg)))
-        if best >= 5:
-            break
-    assert best >= 5, "no visit on this provider itemized — checklist parse collapsed"
-    # A cited visit should yield labeled blocks carrying the state's own
-    # status word. Same caveat as above: the state marks some cited visits
-    # "violations found" without publishing the items, so require blocks
-    # from SOME cited visit rather than from whichever is newest.
-    blocks = []
-    for v in [x for x in with_chk if x["found"]][:4]:
-        page = _get(fo.CHK_TMPL.format(v["chk_id"], "71348"))
-        if "Checklist items were not found" in page:
-            continue
-        blocks = fo._parse_violation_blocks(fo._checklist_segment(page, v["id"]))
-        if blocks:
-            break
-    if blocks:
+    page = _get(fo.CHK_TMPL.format(with_chk[0]["chk_id"], "71348"))
+    seg = fo._checklist_segment(page, with_chk[0]["id"])
+    assert len(fo._parse_checklist_v2(seg)) >= 5, "checklist parse collapsed"
+    # a visit the state marks "violations found" must yield labeled blocks
+    # from its own checklist page (state status word + rule text)
+    cited = [v for v in with_chk if v["found"]]
+    if cited:
+        cseg = fo._checklist_segment(
+            _get(fo.CHK_TMPL.format(cited[0]["chk_id"], "71348")), cited[0]["id"])
+        blocks = fo._parse_violation_blocks(cseg)
+        assert blocks, "violation blocks gone — labels changed"
         assert all(w or o is not None for _, _, w, o in blocks), blocks
 
 
