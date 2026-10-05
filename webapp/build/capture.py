@@ -59,10 +59,19 @@ def main():
     # files under data/processed/facilities/, so they must follow the OCFS crawl
     # above that creates them. All six are required=False: a DOHMH portal outage
     # or an InfoHub 404 must never discard a good OCFS capture.
+    # Per-run caps, because these run in SEQUENCE and the two portal sweeps
+    # are the long ones. Uncapped, a full inspections sweep (68.5 min) plus a
+    # full water-lead sweep (48.9) can consume the step's whole budget and the
+    # four fetchers below them never run at all -- which looks like those
+    # sources being broken rather than never reached. Both write incrementally
+    # and both window on a timestamp, so a cap is a slice, not a loss: three
+    # runs a day drain the backlog instead of one run trying to.
     run("DOHMH inspection histories (per-facility portal)",
-        [os.path.join(HERE, "fetch_inspections.py")], required=False)
+        [os.path.join(HERE, "fetch_inspections.py"),
+         "--limit", os.environ.get("INSPECTIONS_LIMIT", "900")], required=False)
     run("Article 47 water-lead results (per-facility portal)",
-        [os.path.join(HERE, "fetch_water_lead.py")], required=False)
+        [os.path.join(HERE, "fetch_water_lead.py"),
+         "--limit", os.environ.get("WATER_LEAD_LIMIT", "900")], required=False)
     run("GeoSearch rooftop geocode (fills coordinate gaps)",
         [os.path.join(HERE, "fetch_geocode.py")], required=False)
     run("MTA subway entrances (transit proximity)",
