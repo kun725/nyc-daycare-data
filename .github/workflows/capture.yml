@@ -1,8 +1,20 @@
 # The whole job of this repository: pull what the government publishes,
-# commit it with capture dates. Runs twice daily on free public-repo
+# commit it with capture dates. Runs three times daily on free public-repo
 # minutes; the crawl is serial (GitHub runners are datacenter IPs and the
-# state's WAF only allows parallel crawling from residential networks) and
-# stops itself with time to commit before GitHub's 6-hour job kill.
+# state's WAF only allows parallel crawling from residential networks).
+#
+# Budgeting changed on 2026-10-05, because the old shape stopped adding up the
+# moment six more fetchers landed here on 2026-10-04. The OCFS crawl's own
+# 170-minute budget left 30 of the job's 200 minutes for everything else,
+# while the new arrivals can want 157 on their own (inspections 68.5, water
+# lead 48.9, a cold geocode ~40). Over the ceiling the JOB is killed, and a
+# job kill takes every later step with it -- including the commit -- so a run
+# could spend 200 minutes and bank nothing. That is the same way a 60-minute
+# private run banked nothing on 2026-10-04.
+#
+# So the fetch step carries its own ceiling below the job's, and the commit
+# runs if: always(). A step timeout fails the step and keeps the job alive,
+# which is the difference between losing a run and keeping it.
 name: Capture public records
 
 on:
@@ -38,11 +50,26 @@ jobs:
           python-version: "3.12"
       - run: pip install requests pyflakes openpyxl
       - name: Run all fetchers (receipt gates inside)
+        # 175, under the job's 200: this must fail as a STEP so the commit below
+        # still runs. 170 of it was the OCFS crawl's alone, which starved the
+        # six fetchers added on 2026-10-04 -- and because capture.py runs them
+        # in sequence, starvation is not shared evenly: the tail (geocode,
+        # transit, the two DOE workbooks) simply never got reached.
+        timeout-minutes: 175
         env:
           SOCRATA_APP_TOKEN: ${{ secrets.SOCRATA_APP_TOKEN }}
-          OCFS_TIME_BUDGET_MIN: "170"
+          # 100, not 170. Three runs a day at ~800 providers per 170 minutes
+          # still drains the 14-day refresh window, and it leaves ~75 minutes
+          # of the step for the rest of the pipeline.
+          OCFS_TIME_BUDGET_MIN: "100"
         run: python webapp/build/capture.py
       - name: Commit captured records
+        # always(): a fetcher that fails or hits the step ceiling above has
+        # still written real records to disk, and every fetcher in capture.py
+        # is required=False precisely so a partial capture is worth keeping.
+        # Without this, the one thing the repository exists to do is skipped
+        # exactly when it matters most.
+        if: always()
         run: |
           git config user.name "capture-bot"
           git config user.email "actions@github.com"
@@ -51,5 +78,21 @@ jobs:
             echo "No changes captured."
           else
             git commit -m "capture: $(date -u +%FT%H:%MZ)"
-            git push || (git -c rebase.autostash=true pull --rebase -X theirs origin main && git push)
+            # The autostash fallback this replaces is the one that failed on
+            # the private side on 2026-10-04: the push was rejected
+            # non-fast-forward, the retry printed "Created autostash" and then
+            # died with "cannot rebase: You have unstaged changes", discarding
+            # a 60-minute run. Deliberately NOT carrying over that fix's
+            # "git checkout -- . && git clean" step: there it discarded
+            # regenerable build output, whereas here the untracked files under
+            # data/processed/ ARE the capture, and cleaning them would delete
+            # the thing we are trying to push. git add above stages everything
+            # that matters, so by this point the tree is clean and a plain
+            # rebase is enough.
+            if ! git push; then
+              echo "push rejected; replaying the capture commit onto latest main"
+              git fetch origin main
+              git rebase -X theirs FETCH_HEAD
+              git push
+            fi
           fi
