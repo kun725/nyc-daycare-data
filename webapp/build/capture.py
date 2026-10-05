@@ -48,6 +48,30 @@ def main():
          "--refresh-days", os.environ.get("OCFS_REFRESH_DAYS", "14"),
          "--time-budget-min", os.environ.get("OCFS_TIME_BUDGET_MIN", "300"),
          "--workers", os.environ.get("OCFS_CRAWL_WORKERS", "1")])
+    # Moved here from the private repo on 2026-10-04. All six read a public
+    # government source and write into data/processed/, which is this repo's
+    # job -- they were simply never migrated when the split was made, so they
+    # kept running on the private repo's metered minutes. Measured there: the
+    # DOHMH portal scrape was 51.5 min of a 60-min billed run (85%), and the
+    # Article-47 water-lead sweep 48.9 min of a 50-min weekly run.
+    #
+    # Order matters: inspections and water-lead read AND write the per-facility
+    # files under data/processed/facilities/, so they must follow the OCFS crawl
+    # above that creates them. All six are required=False: a DOHMH portal outage
+    # or an InfoHub 404 must never discard a good OCFS capture.
+    run("DOHMH inspection histories (per-facility portal)",
+        [os.path.join(HERE, "fetch_inspections.py")], required=False)
+    run("Article 47 water-lead results (per-facility portal)",
+        [os.path.join(HERE, "fetch_water_lead.py")], required=False)
+    run("GeoSearch rooftop geocode (fills coordinate gaps)",
+        [os.path.join(HERE, "fetch_geocode.py")], required=False)
+    run("MTA subway entrances (transit proximity)",
+        [os.path.join(HERE, "fetch_transit.py")], required=False)
+    run("DOE class size (InfoHub snapshot; self-limits to monthly)",
+        [os.path.join(HERE, "fetch_class_size.py")], required=False)
+    run("DOE school extras (survey/demographics/attendance; self-limits)",
+        [os.path.join(HERE, "fetch_school_extras.py")], required=False)
+
     print("\ncapture complete")
 
 

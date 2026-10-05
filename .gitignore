@@ -3,3 +3,11 @@ __pycache__/
 ._*
 *.log
 webapp/data/processed/suppress.json
+
+# A 6.67MB schools_class_size.json.xlsx.tmp download temp was committed on
+# 2026-09-12 and mirrored into the private repo nightly until 2026-10-04.
+# Neither *.tmp nor the workbooks these fetchers download were ignored.
+*.tmp
+*.tmp.*
+*.xlsx
+*.csv
