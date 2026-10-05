@@ -158,7 +158,12 @@ def fetch_process(pid, tag):
 # then lights it up (current-directory badge, demand, contacts) because the
 # name/address key comes from this very file. No cross-source claims are
 # made: the page says what the DOE lists, nothing else.
-from fetch_signals import canon_addr as _canon
+# addr_util, not fetch_signals: that module cannot run in the public capture
+# repo (it globs the build's output directory, which does not exist there)
+# and was deleted there on 2026-10-04, taking canon_addr with it. This
+# import is module level and MySchools is a required fetcher, so every
+# capture run aborted here. Both repos' copies now read the same.
+from addr_util import canon_addr as _canon
 SRC_DIR = os.path.normpath(os.path.join(HERE, "..", "data", "processed", "facilities"))
 _DISTRICT_BORO = {}
 for _d in range(1, 7): _DISTRICT_BORO[_d] = "Manhattan"
