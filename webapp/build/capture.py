@@ -34,6 +34,23 @@ def run(label, args, required=True):
     return rc
 
 
+def limit_arg(name, default="900"):
+    """Per-run cap for a portal sweep, from the environment.
+
+    os.environ.get(name, default) only falls back when the variable is UNSET. A
+    workflow input left blank arrives as "", which then reached the fetcher as
+    `--limit ""`; the fetcher exited on the bad argument, both sweeps are
+    required=False, and the run stayed green with inspections silently skipped.
+    Unset, empty, non-numeric and non-positive values all mean the default.
+    """
+    raw = os.environ.get(name, "")
+    try:
+        n = int(str(raw).strip())
+    except ValueError:
+        return default
+    return str(n) if n > 0 else default
+
+
 def main():
     run("DOHMH active roster", [os.path.join(HERE, "fetch_active.py")])
     run("OCFS registry (with per-borough receipt gate)",
@@ -68,10 +85,10 @@ def main():
     # runs a day drain the backlog instead of one run trying to.
     run("DOHMH inspection histories (per-facility portal)",
         [os.path.join(HERE, "fetch_inspections.py"),
-         "--limit", os.environ.get("INSPECTIONS_LIMIT", "900")], required=False)
+         "--limit", limit_arg("INSPECTIONS_LIMIT")], required=False)
     run("Article 47 water-lead results (per-facility portal)",
         [os.path.join(HERE, "fetch_water_lead.py"),
-         "--limit", os.environ.get("WATER_LEAD_LIMIT", "900")], required=False)
+         "--limit", limit_arg("WATER_LEAD_LIMIT")], required=False)
     run("GeoSearch rooftop geocode (fills coordinate gaps)",
         [os.path.join(HERE, "fetch_geocode.py")], required=False)
     run("MTA subway entrances (transit proximity)",
