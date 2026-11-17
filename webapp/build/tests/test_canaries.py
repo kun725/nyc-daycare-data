@@ -114,9 +114,17 @@ def test_ocfs_profile_app_alive():
     assert len(visits) >= 3 and all(v["date"] for v in visits)
     with_chk = [v for v in visits if v["chk_id"]]
     assert with_chk, "no checklist links found — markup changed"
-    page = _get(fo.CHK_TMPL.format(with_chk[0]["chk_id"], "71348"))
-    seg = fo._checklist_segment(page, with_chk[0]["id"])
-    assert len(fo._parse_checklist_v2(seg)) >= 5, "checklist parse collapsed"
+    # The newest visit often has no checklist posted yet (the state prints
+    # "Checklist items were not found for this inspection"), so a fresh
+    # inspection is not drift. Judge the parser on the newest few visits that
+    # actually carry items; fail only if none of them parse.
+    n_items = 0
+    for v in with_chk[:6]:
+        page = _get(fo.CHK_TMPL.format(v["chk_id"], "71348"))
+        n_items = len(fo._parse_checklist_v2(fo._checklist_segment(page, v["id"])))
+        if n_items >= 5:
+            break
+    assert n_items >= 5, "checklist parse collapsed on every recent visit"
     # a visit the state marks "violations found" must yield labeled blocks
     # from its own checklist page (state status word + rule text)
     cited = [v for v in with_chk if v["found"]]
