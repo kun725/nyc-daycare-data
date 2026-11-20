@@ -256,6 +256,17 @@ def needs_refresh(fac, force, cutoff_iso):
     return not fetched or fetched < cutoff_iso
 
 
+def never_fetched_first(targets):
+    """Centers with no fetch stamp go to the front of the queue.
+
+    Targets arrive in filename order and are then cut to --limit, so during a
+    full backlog a newly licensed center could wait several runs behind
+    re-fetches of centers that already have a history. A new center has nothing
+    on its page until this runs. Stable sort: order within each group is kept.
+    """
+    return sorted(targets, key=lambda t: bool(t[1].get("portal_inspections_fetched")))
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--force", action="store_true", help="re-fetch all, ignore age")
@@ -275,6 +286,7 @@ def main():
             continue
         if needs_refresh(fac, args.force, cutoff_iso):
             targets.append((p, fac))
+    targets = never_fetched_first(targets)
     if args.limit:
         targets = targets[:args.limit]
 
