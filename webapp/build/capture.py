@@ -83,6 +83,12 @@ def main():
     # sources being broken rather than never reached. Both write incrementally
     # and both window on a timestamp, so a cap is a slice, not a loss: three
     # runs a day drain the backlog instead of one run trying to.
+    # Mint a record for every roster center we hold no file for, BEFORE the
+    # inspection sweep, so the sweep can fetch it. This used to run only in the
+    # private build: stubs were created there, never reached this repo, and so
+    # were never scraped. required=False for the same reason as the sweeps.
+    run("Reconcile centers to the active roster (mints new centers)",
+        [os.path.join(HERE, "reconcile_active.py")], required=False)
     run("DOHMH inspection histories (per-facility portal)",
         [os.path.join(HERE, "fetch_inspections.py"),
          "--limit", limit_arg("INSPECTIONS_LIMIT")], required=False)
