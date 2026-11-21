@@ -245,6 +245,35 @@ def _parse_info_v2(page):
     if m: out["contact_name"] = _re.sub(r"\s{2,}", " ", m.group(1).strip())
     return out
 
+# ── Per-year history (2026-11-20) ───────────────────────────────────────────
+# GetInspectionHistory/{id} with no year returns the CURRENT calendar year
+# only. Verified on provider 441669: the default page listed 5 visits, all
+# 2026, while ?id=441669&year=2025 listed 5 more and &year=2024 another 6
+# (six of those eleven with violations found). The crawler read only the
+# default page, so every provider first crawled after the state's September
+# 2026 app move held no visit before 2026: 2,885 of 7,626 providers with any
+# visit. It would also have dropped late-2026 visits on January 1.
+# YEAR_TMPL was defined for exactly this and never called.
+HISTORY_YEARS = 3          # prior calendar years held besides the current one
+YEAR_SETTLE = "-02-15"     # a year is final once read on or after Feb 15 of the next
+
+
+def _today():
+    return _dt.datetime.now(_dt.timezone.utc).date()
+
+
+def _years_due(entry, today):
+    """Prior calendar years whose own page still has to be read, newest first.
+    A past year is read once and then left alone; the year that just ended is
+    re-read until Feb 15 so visits the state posts late are not lost."""
+    read = entry.get("hist_years") or {}
+    due = []
+    for y in range(today.year - 1, today.year - HISTORY_YEARS - 1, -1):
+        if (read.get(str(y)) or "") < f"{y + 1}{YEAR_SETTLE}":
+            due.append(y)
+    return due
+
+
 def _parse_history_v2(page):
     """Visit list from GetInspectionHistory: [{date,type,id,found,chk_id}].
     Each visit's checklist LINK precedes its field block, but a naive
@@ -500,6 +529,7 @@ def scrape_profiles(limit=None, delay=2.0, checklist_budget=2500,
     done = errors = new_visits = 0
     _bud_lock = threading.Lock()
     _bud = {"used": 0}
+    _yr = {"read": 0, "failed": 0}
 
     def _chk_allow():
         # Checklist budget shared across workers; check-and-take under a lock.
@@ -521,10 +551,44 @@ def scrape_profiles(limit=None, delay=2.0, checklist_budget=2500,
         time.sleep(delay)
         visits = _parse_history_v2(_get_page(HIST_TMPL.format(fid)))
         time.sleep(delay)
+        # Prior years live on their own pages (see HISTORY_YEARS). A year whose
+        # page cannot be read stays due and is tried again next crawl; it never
+        # fails the provider, whose current-year history is already in hand.
+        today = _today()
+        this_year = str(today.year)
+        yr = {"read": 0, "failed": 0}
+        years_ok = []
+        for y in _years_due(entry, today):
+            try:
+                visits += _parse_history_v2(_get_page(YEAR_TMPL.format(fid, y)))
+                years_ok.append(y)
+                yr["read"] += 1
+            except Exception:
+                yr["failed"] += 1
+            time.sleep(delay)
+        # A visit left without its detail (the checklist budget ran out, or the
+        # page failed) is fetched again instead of staying blank for good.
+        # Only visits this crawl can see again are reopened; one on a page not
+        # read this time is kept as it is.
+        _seen_now = {v["id"] for v in visits if v["id"]}
+        pending = {i.get("id") for i in entry.get("inspections", [])
+                   if i.get("id") and i.get("details_pending") and i.get("id") in _seen_now}
+        entry["inspections"] = [i for i in entry.get("inspections", [])
+                                if not (i.get("id") and i.get("id") in pending)]
         known = {i.get("id") for i in entry.get("inspections", []) if i.get("id")}
+        seen_noid = {(i.get("date"), i.get("type")) for i in entry.get("inspections", [])
+                     if not i.get("id")}
+        years_pending = set()
         for v in visits:
             if v["id"] and v["id"] in known:
                 continue
+            if not v["id"]:
+                if (v["date"], v["type"]) in seen_noid:
+                    continue
+                seen_noid.add((v["date"], v["type"]))
+            else:
+                known.add(v["id"])      # each year's page repeats the newest visit
+            prior_year = not v["date"].startswith(this_year)
             insp = {"date": v["date"], "type": v["type"], "id": v["id"],
                     "result": "Violations Found" if v["found"] else "No Violations Found",
                     "had_violation": v["found"], "violations": []}
@@ -548,7 +612,11 @@ def scrape_profiles(limit=None, delay=2.0, checklist_budget=2500,
                             "code": code, "desc": desc,
                             "status": ("Corrected on-Site" if onsite
                                        else (word or "Not Corrected"))})
-                    if not insp["violations"]:
+                    # The fallback below DERIVES "Not Corrected" from a grid
+                    # mark. For a visit from an earlier year that would call a
+                    # long-settled citation open today, so earlier years take
+                    # the state's own status word or nothing.
+                    if not insp["violations"] and not prior_year:
                         for code, desc, stat, corrected in _parse_checklist_v2(seg):
                             if stat == "N":
                                 insp["violations"].append({
@@ -566,8 +634,18 @@ def scrape_profiles(limit=None, delay=2.0, checklist_budget=2500,
                 # The state's checklist is officially "a partial list";
                 # this visit's citation isn't itemized in it.
                 insp["not_itemized"] = True
+            if insp.get("details_pending"):
+                years_pending.add(v["date"][:4])
             entry["inspections"].append(insp)
             nv += 1
+        # A year counts as read only when every cited visit in it has its
+        # detail; otherwise it stays due and the pending visits are retried.
+        if years_ok:
+            hy = dict(entry.get("hist_years") or {})
+            for y in years_ok:
+                if str(y) not in years_pending:
+                    hy[str(y)] = today.isoformat()
+            entry["hist_years"] = hy
         entry["inspections"].sort(key=lambda i: i.get("date") or "", reverse=True)
         entry["last_inspection"] = (entry["inspections"][0]["date"]
                                     if entry["inspections"] else None)
@@ -610,6 +688,9 @@ def scrape_profiles(limit=None, delay=2.0, checklist_budget=2500,
         except Exception:
             pass
         entry["fetched_at"] = _now()
+        with _bud_lock:
+            _yr["read"] += yr["read"]
+            _yr["failed"] += yr["failed"]
         return entry, nv
 
     # Wave-based submission: the main thread owns every cache write and
@@ -687,6 +768,20 @@ def scrape_profiles(limit=None, delay=2.0, checklist_budget=2500,
     total = done + errors
     print(f"v2 crawl: {done} ok / {errors} errors of {total} attempted; "
           f"{new_visits} new visits; {chk_used} checklists fetched.")
+    # Coverage of the prior-year window, counted over the whole cache so the
+    # number is the state of the data, not of this run.
+    _tdy = _today()
+    _with = [e for e in cache.values() if e.get("inspections")]
+    _full = sum(1 for e in _with if not _years_due(e, _tdy))
+    _cur_only = sum(1 for e in _with
+                    if min(i.get("date") or "9" for i in e["inspections"]) >= str(_tdy.year))
+    print(f"prior-year history: {_yr['read']} year pages read, {_yr['failed']} failed this run; "
+          f"{_full} of {len(_with)} providers hold all {HISTORY_YEARS} prior years; "
+          f"{_cur_only} hold no visit before {_tdy.year}.")
+    if _yr["read"] + _yr["failed"] >= 20 and _yr["failed"] > 0.5 * (_yr["read"] + _yr["failed"]):
+        print(f"::error title=OCFS per-year history failing::{_yr['failed']} of "
+              f"{_yr['read'] + _yr['failed']} per-year pages failed. Earlier years are NOT filling in.")
+        sys.exit(3)
     # Crawl-health gate: mass failure must be LOUD (the Aug-12 route move
     # 404ed every fetch for a month in silence).
     if total >= 20 and errors > 0.5 * total:
